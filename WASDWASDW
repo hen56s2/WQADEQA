@@ -12,23 +12,6 @@ Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.05, 0, 0.05, 0)
 Frame.Size = UDim2.new(0.1, 0, 0.1, 0)
 
--- Function to handle touch input
-local function onTouch()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
-end
-
-Frame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-        onTouch()
-    end
-end)
-
-UITextSizeConstraint.Parent = Frame
-UITextSizeConstraint.MaxTextSize = 50
-
-UICorner.CornerRadius = UDim.new(0, 11)
-UICorner.Parent = Frame
-
     local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
     local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
     local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -1052,13 +1035,19 @@ UICorner.Parent = Frame
     -- which has been marked to be one that auto loads!
     SaveManager:LoadAutoloadConfig()
 
-    Frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch then
-            onTouch()
-        end
-    end)
-    
-    -- Function to handle touch input
-    local function onTouch()
-        game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+local function onTouch()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+end
+
+-- Detect touch input directly using UserInputService
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch then
+        onTouch()
     end
+end)
+
+UITextSizeConstraint.Parent = Frame
+UITextSizeConstraint.MaxTextSize = 50
+
+UICorner.CornerRadius = UDim.new(0, 11)
+UICorner.Parent = Frame
