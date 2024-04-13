@@ -1,29 +1,38 @@
 local ScreenGui = Instance.new("ScreenGui")
-local MobileButton = Instance.new("ImageButton")  -- Changed TextButton to ImageButton for a visible GUI
+local TextButton = Instance.new("TextButton")
 local UICorner = Instance.new("UICorner")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 -- Adjusted position and size for mobile
-MobileButton.Parent = ScreenGui
-MobileButton.BackgroundTransparency = 1
-MobileButton.Position = UDim2.new(0.05, 0, 0.85, 0)  -- Adjusted position for bottom left corner
-MobileButton.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Adjusted size for mobile
-MobileButton.Image = "rbxassetid://3570695787"
-MobileButton.ScaleType = Enum.ScaleType.Slice
+TextButton.Parent = ScreenGui
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 0.5
+TextButton.Position = UDim2.new(0.5, -50, 0.5, -25)  -- Centered position
+TextButton.Size = UDim2.new(0, 100, 0, 50)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Press Ctrl"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextScaled = true
+
+-- Apply UICorner to TextButton with a corner radius of 5
+UICorner.CornerRadius = UDim.new(0, 5)
+UICorner.Parent = TextButton
 
 -- Function to handle button activation
 local function ActivateButton()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+    print("Left Control key pressed")
+    -- Add your code here to handle the Left Control keybind action
 end
 
-MobileButton.MouseButton1Click:Connect(ActivateButton)  -- Connect MouseButton1Click event for PC
-MobileButton.TouchTap:Connect(ActivateButton)  -- Connect TouchTap event for mobile
+-- Bind the ActivateButton function to Left Control key
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
+    if input.KeyCode == Enum.KeyCode.LeftControl then
+        ActivateButton()
+    end
+end)
 
--- Apply UICorner to MobileButton with a corner radius of 0.8
-UICorner.CornerRadius = UDim.new(0, 11)
-UICorner.Parent = MobileButton
 
     local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
     local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
