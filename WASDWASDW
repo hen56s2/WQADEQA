@@ -5,8 +5,8 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 local Frame = Instance.new("Frame")
 Frame.Parent = ScreenGui
 Frame.BackgroundTransparency = 1
-Frame.Position = UDim2.new(0.05, 0, 0.05, 0)  -- Adjusted position to upper-left corner
 Frame.Size = UDim2.new(0.1, 0, 0.1, 0)
+Frame.Position = UDim2.new(0.05, 0, 0.05, 0)
 
 local TextButton = Instance.new("TextButton")
 TextButton.Parent = Frame
@@ -24,8 +24,8 @@ local function sendKeyEvent()
     game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
 end
 
--- Connect touch event for mobile or mouse button event for desktop
-TextButton.MouseButton1Click:Connect(sendKeyEvent)
+-- Connect touch event for mobile or click event for desktop
+TextButton.Activated:Connect(sendKeyEvent)
 
     
     
