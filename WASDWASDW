@@ -11,45 +11,30 @@ KeySystemUI.New({
 repeat task.wait() until KeySystemUI.Finished() or KeySystemUI.Closed
 if KeySystemUI.Finished() and KeySystemUI.Closed == false then
     print("Key verified, can load script")
-    local ScreenGui = Instance.new("ScreenGui")
-    local ImageLabel = Instance.new("ImageLabel")
-    local TextButton = Instance.new("TextButton")
-    local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-    local UICorner = Instance.new("UICorner")
-    
-    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    
-    -- Adjusted position and size for mobile
-    ImageLabel.Parent = ScreenGui
-    ImageLabel.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-    ImageLabel.BorderSizePixel = 0
-    ImageLabel.Position = UDim2.new(0.05, 0, 0.85, 0)  -- Adjusted position for bottom left corner
-    ImageLabel.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Adjusted size for mobile
-    ImageLabel.Image = "rbxassetid://3570695787"
-    ImageLabel.ImageColor3 = Color3.fromRGB(60, 60, 60)
-    ImageLabel.ScaleType = Enum.ScaleType.Slice
-    
-    TextButton.Parent = ImageLabel
-    TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TextButton.BackgroundTransparency = 1
-    TextButton.Size = UDim2.new(1, 0, 1, 0)
-    TextButton.Font = Enum.Font.Cartoon
-    TextButton.Text = "NS"
-    TextButton.TextColor3 = Color3.fromRGB(500, 500, 500)
-    TextButton.TextScaled = true
-    TextButton.TextSize = 24
-    TextButton.TextWrapped = true
-    TextButton.MouseButton1Down:Connect(function()
-        game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
-    end)
-    
-    UITextSizeConstraint.Parent = TextButton
-    UITextSizeConstraint.MaxTextSize = 50
-    
-    -- Apply UICorner to ImageLabel with a corner radius of 0.8
-    UICorner.CornerRadius = UDim.new(0, 11)
-    UICorner.Parent = ImageLabel    
+local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")  -- Changed TextButton to ImageButton
+local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+local UICorner = Instance.new("UICorner")
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Adjusted position and size for mobile
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundTransparency = 1
+ImageButton.Position = UDim2.new(0.05, 0, 0.85, 0)  -- Adjusted position for bottom left corner
+ImageButton.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Adjusted size for mobile
+ImageButton.Image = "rbxassetid://3570695787"
+ImageButton.ScaleType = Enum.ScaleType.Slice
+
+ImageButton.MouseButton1Down:Connect(function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+end)
+
+-- Apply UICorner to ImageButton with a corner radius of 0.8
+UICorner.CornerRadius = UDim.new(0, 11)
+UICorner.Parent = ImageButton
+
     
     local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
     local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
