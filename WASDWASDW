@@ -1,56 +1,32 @@
--- KEY SYSTEM V2 UI LIBRARY:
--- UI by mr.xrer | Code by mstudio45
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local KeySystemUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/xrer_mstudio45.lua"))()
-KeySystemUI.New({
-    ApplicationName = "NSHUB", -- Your Key System Application Name
-    Name = "NS HUB KEY SYSTEM", -- Your Script name
-    Info = "Tap Get Key and Copy it or Buy Premium", -- Info text in the GUI, keep empty for default text.
-    DiscordInvite = "https://discord.gg/ZkptAdmFDg" -- Optional.
-})
-repeat task.wait() until KeySystemUI.Finished() or KeySystemUI.Closed
-if KeySystemUI.Finished() and KeySystemUI.Closed == false then
-    print("Key verified, can load script")
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    
-    local Frame = Instance.new("Frame")
-    Frame.Parent = ScreenGui
-    Frame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-    Frame.BackgroundTransparency = 0.5
-    Frame.Position = UDim2.new(0.05, 0, 0.05, 0)  -- Adjusted position to upper-left corner
-    Frame.Size = UDim2.new(0.1, 0, 0.1, 0)
-    
-    local TextButton = Instance.new("TextButton")
-    TextButton.Parent = Frame
-    TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TextButton.BackgroundTransparency = 0.5
-    TextButton.Size = UDim2.new(1, 0, 1, 0)
-    TextButton.Font = Enum.Font.Cartoon
-    TextButton.Text = "NS"
-    TextButton.TextColor3 = Color3.fromRGB(10, 10, 10)
-    TextButton.TextScaled = true
-    TextButton.TextSize = 24
-    TextButton.TextWrapped = true
-    
-    local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-    UITextSizeConstraint.Parent = TextButton
-    UITextSizeConstraint.MaxTextSize = 50
-    
-    -- Function to send a key press event
-    local function sendKeyEvent()
-        game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
-    end
-    
-    -- Connect touch event for mobile or mouse button event for desktop
-    if game:GetService("UserInputService").TouchEnabled then
-        -- Mobile touch event
-        TextButton.MouseButton1Click:Connect(sendKeyEvent)
-    else
-        -- Desktop mouse button event
-        TextButton.MouseButton1Down:Connect(sendKeyEvent)
-    end
+local Frame = Instance.new("Frame")
+Frame.Parent = ScreenGui
+Frame.BackgroundTransparency = 1
+Frame.Position = UDim2.new(0.05, 0, 0.05, 0)  -- Adjusted position to upper-left corner
+Frame.Size = UDim2.new(0.1, 0, 0.1, 0)
+
+local TextButton = Instance.new("TextButton")
+TextButton.Parent = Frame
+TextButton.BackgroundTransparency = 1
+TextButton.Size = UDim2.new(1, 0, 1, 0)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "NS"
+TextButton.TextColor3 = Color3.fromRGB(10, 10, 10)
+TextButton.TextScaled = true
+TextButton.TextSize = 24
+TextButton.TextWrapped = true
+
+-- Function to send a key press event
+local function sendKeyEvent()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+end
+
+-- Connect touch event for mobile or mouse button event for desktop
+TextButton.MouseButton1Click:Connect(sendKeyEvent)
+
     
     
     
