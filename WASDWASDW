@@ -1,31 +1,32 @@
+local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = PlayerGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local Frame = Instance.new("Frame")
-Frame.Parent = ScreenGui
-Frame.BackgroundTransparency = 1
-Frame.Size = UDim2.new(0.1, 0, 0.1, 0)
-Frame.Position = UDim2.new(0.05, 0, 0.05, 0)
-
+-- Create a TextButton for mobile
 local TextButton = Instance.new("TextButton")
-TextButton.Parent = Frame
-TextButton.BackgroundTransparency = 1
-TextButton.Size = UDim2.new(1, 0, 1, 0)
+TextButton.Parent = ScreenGui
+TextButton.Size = UDim2.new(0, 200, 0, 50)
+TextButton.Position = UDim2.new(0.5, -100, 0.5, -25)
+TextButton.AnchorPoint = Vector2.new(0.5, 0.5)
 TextButton.Font = Enum.Font.SourceSans
-TextButton.Text = "NS"
-TextButton.TextColor3 = Color3.fromRGB(10, 10, 10)
-TextButton.TextScaled = true
-TextButton.TextSize = 24
-TextButton.TextWrapped = true
+TextButton.Text = "Mobile Button"
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+TextButton.BorderSizePixel = 0
+TextButton.TextSize = 20
 
--- Function to send a key press event
-local function sendKeyEvent()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+-- Function to handle button click
+local function onButtonClicked()
+    print("Mobile button clicked!")
+    -- Add your functionality here
 end
 
--- Connect touch event for mobile or click event for desktop
-TextButton.Activated:Connect(sendKeyEvent)
+-- Connect button click event
+TextButton.MouseButton1Click:Connect(onButtonClicked)
+
 
     
     
