@@ -1,16 +1,51 @@
+-- KEY SYSTEM V2 UI LIBRARY:
+-- UI by mr.xrer | Code by mstudio45
+
+local KeySystemUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/xrer_mstudio45.lua"))()
+KeySystemUI.New({
+    ApplicationName = "NSHUB", -- Your Key System Application Name
+    Name = "NS HUB KEY SYSTEM", -- Your Script name
+    Info = "Tap Get Key and Copy it or Buy Premium", -- Info text in the GUI, keep empty for default text.
+    DiscordInvite = "https://discord.gg/ZkptAdmFDg" -- Optional.
+})
+repeat task.wait() until KeySystemUI.Finished() or KeySystemUI.Closed
+if KeySystemUI.Finished() and KeySystemUI.Closed == false then
+    print("Key verified, can load script")
 local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
+local ImageLabel = Instance.new("ImageLabel")
+local ImageButton = Instance.new("ImageButton")  -- Changed to ImageButton
 local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
 local UICorner = Instance.new("UICorner")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.05, 0, 0.05, 0)
-Frame.Size = UDim2.new(0.1, 0, 0.1, 0)
+ImageLabel.Parent = ScreenGui
+ImageLabel.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.05, 0, 0.05, 0)  -- Adjusted position
+ImageLabel.Size = UDim2.new(0.1, 0, 0.1, 0)
+ImageLabel.ImageColor3 = Color3.fromRGB(60, 60, 60)
+ImageLabel.ScaleType = Enum.ScaleType.Slice
+
+ImageButton.Parent = ImageLabel  -- Changed parent to ImageLabel
+ImageButton.BackgroundTransparency = 1
+ImageButton.Size = UDim2.new(1, 0, 1, 0)
+ImageButton.Image = ""  -- No image set for the ImageButton
+ImageButton.MouseButton1Down:Connect(function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+end)
+
+UITextSizeConstraint.Parent = ImageButton
+UITextSizeConstraint.MaxTextSize = 50
+
+-- Apply UICorner to ImageLabel with a corner radius of 0.8
+UICorner.CornerRadius = UDim.new(0, 11)
+UICorner.Parent = ImageLabel
+
+    
+    
+    
 
     local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
     local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
@@ -1034,20 +1069,6 @@ Frame.Size = UDim2.new(0.1, 0, 0.1, 0)
     -- You can use the SaveManager:LoadAutoloadConfig() to load a config
     -- which has been marked to be one that auto loads!
     SaveManager:LoadAutoloadConfig()
-
-local function onTouch()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
+else
+    print("Player closed the GUI.")
 end
-
--- Detect touch input directly using UserInputService
-game:GetService("UserInputService").InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.Touch then
-        onTouch()
-    end
-end)
-
-UITextSizeConstraint.Parent = Frame
-UITextSizeConstraint.MaxTextSize = 50
-
-UICorner.CornerRadius = UDim.new(0, 11)
-UICorner.Parent = Frame
