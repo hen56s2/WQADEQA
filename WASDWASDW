@@ -11,9 +11,8 @@ KeySystemUI.New({
 repeat task.wait() until KeySystemUI.Finished() or KeySystemUI.Closed
 if KeySystemUI.Finished() and KeySystemUI.Closed == false then
     print("Key verified, can load script")
-local ScreenGui = Instance.new("ScreenGui")
-local ImageButton = Instance.new("ImageButton")  -- Changed TextButton to ImageButton
-local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+    local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -27,13 +26,14 @@ ImageButton.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Adjusted size for mobile
 ImageButton.Image = "rbxassetid://3570695787"
 ImageButton.ScaleType = Enum.ScaleType.Slice
 
-ImageButton.MouseButton1Down:Connect(function()
+ImageButton.Activated:Connect(function()
     game:GetService("VirtualInputManager"):SendKeyEvent(true, "K", false, game)
 end)
 
 -- Apply UICorner to ImageButton with a corner radius of 0.8
 UICorner.CornerRadius = UDim.new(0, 11)
 UICorner.Parent = ImageButton
+
 
     
     local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
